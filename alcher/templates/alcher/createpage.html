@@ -1,0 +1,92 @@
+{% extends "alcher/base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static '/alcher/createpost.css' %}">
+            <p class="cpostheader">Create a new post</p>
+            <div class="newpost">
+                <p class="post-header">Image</p>
+                <div class="imgupload" ><p class="nimg1">Upload an image</p></div>
+                <p class="post-header">Caption</p>
+                <div class="imgupload2" ><input class="nimg2" placeholder="Give an image caption"></div>
+                <div class="postfooter">
+                    <p class="loc">Current Location<p/>
+                </div>
+                
+            </div>
+           <a href="homepage.html"><button type="button" class="btn btn-outline-danger">Share</button> </a> 
+        </div>
+        <div class="mcard">
+            <div class="card1">
+                <div class="card-header1">
+                    <h1 class="profile">My Profile</h1>
+                    <a href="login.html"><img src="{% static '/alcher/exit.png' %}" class="logout" alt=""></a> 
+                </div>
+                <div class="card-body1">
+                    <div class="my-profile"><img src="{% static '/alcher/pexels-pixabay-206359.jpg' %}" class="profileimg" alt="">
+                        <div class="name">
+                            <p class="uname">username</p>
+                            <p class="pname">Personal Name</p>
+                        </div>
+                    </div>
+                    <p class="body-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, illo magni!
+                        Porro exercitationem nihil explicabo </p>
+                        <a href="/home/mypost/"><div class="mpost"><i class="gg-add plus"></i>
+                            <p class="post">My posts</p>
+                        </div></a> 
+                    <div class="spost"><i class="gg-bookmark mark"></i>
+                        <p class="post">Saved posts</p>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+            <a href="createpage.html"><div class="cpost"><i class="gg-add plus1"></i>
+                <p class="post">Create a new post</p>
+            </div></a>
+        </div>
+
+
+    </div>
+
+
+
+<script >
+
+    const postfooter = document.querySelector('.postfooter');
+    
+    
+    const success = (position) => {
+    
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+    
+        const url = `https://us1.locationiq.com/v1/reverse.php?key=pk.d44e24001546e4679ab30f4f5fdbd6da&lat=${latitude}&lon=${longitude}&format=json`;
+        
+        
+        fetch(url)
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data)
+                const locname = {
+                    city: data.address.city,
+                    state: data.address.state,
+                    postcode: data.address.postcode
+                }
+                var location = document.createTextNode(locname.city + ', ' + locname.state + ', ' + locname.postcode);
+    
+                postfooter.appendChild(location);
+            })
+    };
+    const error = (error) => {
+      
+         if (error.code == error.PERMISSION_DENIED) {
+            const Error = document.createTextNode("Grant location permission");
+            postfooter.appendChild(Error);
+        } 
+        
+    };
+    
+    navigator.geolocation.getCurrentPosition(success, error);</script>
+{% endblock content %}
