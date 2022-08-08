@@ -1,0 +1,15 @@
+{% extends "alcher/base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static '/alcher/login.css' %}">
+<p class="para">Alcheringa connect lets you associate with the people in your life</p>
+</div>
+<div>
+    <h2>You have been logged out</h2>
+   
+
+            <a href="{% url 'login' %}"> <button class="btn btn-outline-info" type="submit" style="margin-bottom:30px ;">Log In Again</button>
+           </a>
+        
+    </div>
+{% endblock content %}

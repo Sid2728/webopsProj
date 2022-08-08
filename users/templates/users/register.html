@@ -1,0 +1,34 @@
+{% extends "alcher/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static '/alcher/login.css' %}">
+<p class="para">Alcheringa connect lets you associate with the people in your life</p>
+</div>
+<div class="content-section">
+    <div class="card1" style="width: 350px; margin-top: -200px;">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+
+                <div class="card-header1"><p style="font-size:20px; color:white; padding-left: 10px;">Register</p>
+                    <div class="headerlink" style="display:flex ; justify-content:space-between; padding: 5px 20px 0px 10px;">
+                        <p class="sign-in" style="color:white ; font-size: 12px; margin-right: 0px;">
+                            Already Have An Account? </p><a class="ml-2" href="{% url 'login' %}"" style="color:white ; font-size: 12px; margin-right: 0px;">Sign In</a>
+                    </div>
+
+
+
+                </div>
+                <div class="card-body1" style="padding-right:20px ; margin-top: 20px;">
+                    {{ form|crispy }}
+                </div>
+            </fieldset>
+            <div class="form-group" style="text-align:center;">
+                <button class="btn btn-outline-info" type="submit" style="width:300px; margin-top:-50px;">Sign Up</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock content %}
